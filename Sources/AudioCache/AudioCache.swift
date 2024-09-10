@@ -6,18 +6,18 @@ import Foundation
 import CryptoKit
 
 /// A singleton class that can be used to download audio from remote URLs and cache the audio locally.
-class AudioCache {
+public class AudioCache {
 
 	/// The singleton instance
-	static var shared: AudioCache = { AudioCache() }()
+	public static var shared: AudioCache = { AudioCache() }()
 
 	/// The URLSession instance to use for fetching audio. Main purpose is to enable unit testing.
-	var urlSession = URLSession.shared
+	public var urlSession = URLSession.shared
 
 	/// The cached audio files are stored under the Application Support directory,
 	/// in a folder named by `cacheFolderName`. Defaults to "Audio Cache".
 	/// This folder  will be created if needed.
-	var cacheFolderName = "Audio Cache"
+	public var cacheFolderName = "Audio Cache"
 
 	private init() {
 	}
@@ -30,7 +30,7 @@ class AudioCache {
 	/// - Parameter sourceURL: The remote URL source for the audio.
 	///
 	/// - Returns: A tuple of (local file: URL, audio: Data).
-	final func fetchAudio(from sourceURL: URL) async throws -> (URL, Data) {
+	public final func fetchAudio(from sourceURL: URL) async throws -> (URL, Data) {
 		let localFileURL = try self.cacheURL(for: sourceURL)
 
 		if FileManager.default.fileExists(atPath: localFileURL.path) {
@@ -45,7 +45,7 @@ class AudioCache {
 
 	/// Removes the cached file for the given URL.
 	/// - Parameter sourceURL: The remote URL source for the audio.
-	final func removeCachedFile(for sourceURL: URL) async throws {
+	public final func removeCachedFile(for sourceURL: URL) async throws {
 		let localFileURL = try self.cacheURL(for: sourceURL)
 		try FileManager.default.removeItem(at: localFileURL)
 	}
