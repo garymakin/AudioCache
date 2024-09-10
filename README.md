@@ -46,7 +46,8 @@ AudioCache.shared.removeCachedFile(for: url)
 ## Settings
 
 The cached files are stored in the Application Support directory, in a folder named "Audio Cache".
-This folder name can be changed with:
+This folder name is stored in `AudioCache.shared.cacheFolderName`.
+Note: Do not localise this string, as the cache would change location, leaving orphaned files. 
 
 ```swift
 AudioCache.shared.cacheFolderName = "My cache folder"
